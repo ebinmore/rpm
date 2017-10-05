@@ -38,6 +38,10 @@ make_notify_task = Proc.new do
           :license_key => license_key
         }
 
+        puts "New Relic deployment options"
+        puts "----------------------------"
+        puts deploy_options
+
         logger.debug "Uploading deployment to New Relic"
         deployment = NewRelic::Cli::Deployments.new deploy_options
         deployment.run
