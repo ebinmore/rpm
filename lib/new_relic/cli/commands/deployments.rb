@@ -91,6 +91,7 @@ class NewRelic::Cli::Deployments < NewRelic::Cli::Command
       puts "New Relic"
       puts "--------------------------------"
       puts "  request.uri : #{request.uri}"
+      puts "  request.path : #{request.path}"
       puts "  request params : #{create_params}"
       puts ""
 
@@ -99,6 +100,7 @@ class NewRelic::Cli::Deployments < NewRelic::Cli::Command
       puts "  response.class.name : #{response.class.name}"
       puts "  response.status : #{response.code}"
       puts "  response.body : #{response.body}"
+      puts "  response.message : #{response.message}"
       puts "  response.uri : #{response.uri}"
 
       if response.is_a? Net::HTTPSuccess
