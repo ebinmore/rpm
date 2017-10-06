@@ -95,14 +95,15 @@ class NewRelic::Cli::Deployments < NewRelic::Cli::Command
 
       response = http.request(request)
 
+      puts "  response.class.name : #{response.class.name}"
       puts "  response.status : #{response.code}"
       puts "  response.body : #{response.body}"
+      puts "  response.uri : #{response.uri}"
 
       if response.is_a? Net::HTTPSuccess
         info "Recorded deployment to '#{@appname}' (#{@description || Time.now })"
       else
         err_string = REXML::Document.new(response.body).elements['errors/error'].map(&:to_s).join("; ") rescue  response.message
-        puts "New Relic "
         raise NewRelic::Cli::Command::CommandFailure, "Deployment not recorded: #{err_string}"
       end
     rescue SystemCallError, SocketError => e
