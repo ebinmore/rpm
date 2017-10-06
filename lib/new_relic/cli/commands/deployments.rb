@@ -90,6 +90,7 @@ class NewRelic::Cli::Deployments < NewRelic::Cli::Command
 
       puts "New Relic"
       puts "--------------------------------"
+      puts "  request.uri : #{request.uri}"
       puts "  request params : #{create_params}"
       puts ""
 
