@@ -88,12 +88,21 @@ class NewRelic::Cli::Deployments < NewRelic::Cli::Command
 
       request.set_form_data(create_params)
 
+      puts "New Relic"
+      puts "--------------------------------"
+      puts "  request params : #{create_params}"
+      puts ""
+
       response = http.request(request)
+
+      puts "  response.status : #{response.code}"
+      puts "  response.body : #{response.body}"
 
       if response.is_a? Net::HTTPSuccess
         info "Recorded deployment to '#{@appname}' (#{@description || Time.now })"
       else
         err_string = REXML::Document.new(response.body).elements['errors/error'].map(&:to_s).join("; ") rescue  response.message
+        puts "New Relic "
         raise NewRelic::Cli::Command::CommandFailure, "Deployment not recorded: #{err_string}"
       end
     rescue SystemCallError, SocketError => e
